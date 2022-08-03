@@ -1,0 +1,87 @@
+version: '3.8'
+services:
+
+  #
+  # The API that server configuration for the Dynamic Authenticator
+  #
+  dynamic-authenticator-api:
+    build: ./api
+    hostname: dynamic-authenticator-api
+    ports:
+      - "8080:8080"
+    environment:
+      NODE_ENV: 'production'
+      CONFIG_ENCRYPTION_KEY: $CONFIG_ENCRYPTION_KEY
+
+  #
+  # An SQL database used by the Curity Identity Server Provider 1
+  #
+  provider1-data:
+    image: postgres:13.2
+    hostname: dbserver1
+    volumes:
+      - ./idsvr/provider1/data-backup.sql:/docker-entrypoint-initdb.d/data-backup.sql
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'Password1'
+      POSTGRES_DB: 'idsvr'
+
+  #
+  # A standalone instance of the Curity Identity Server Provider 1
+  #
+  provider1-idsvr:
+    image: curity.azurecr.io/curity/idsvr:7.2.0
+    ports:
+      - "6750:6749"
+      - "8444:8443"
+    volumes:
+      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+      - ./idsvr/provider1/config-backup.xml:/opt/idsvr/etc/init/config.xml
+      - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
+    environment:
+      PASSWORD: 'Password1'
+      IDSVR_BASE_URL: "https://provider1.example.com:8444"
+      LOGGING_LEVEL: 'DEBUG'
+
+  #
+  # An SQL database used by the Curity Identity Server Provider 2
+  #
+  provider2-data:
+    image: postgres:13.2
+    hostname: dbserver2
+    volumes:
+      - ./idsvr/provider2/data-backup.sql:/docker-entrypoint-initdb.d/data-backup.sql
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'Password1'
+      POSTGRES_DB: 'idsvr'
+
+  #
+  # A standalone instance of the Curity Identity Server Provider 2
+  #
+  provider2-idsvr:
+    image: curity.azurecr.io/curity/idsvr:7.2.0
+    ports:
+      - "6751:6749"
+      - "8445:8443"
+    volumes:
+      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+      - ./idsvr/provider2/config-backup.xml:/opt/idsvr/etc/init/config.xml
+      - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
+    environment:
+      PASSWORD: 'Password1'
+      IDSVR_BASE_URL: "https://provider2.example.com:8445"
+      LOGGING_LEVEL: 'DEBUG'
+
+  #
+  # The instance of the Curity Identity Server that uses the Dynamic Authenticator
+  #
+#  authenticator-demo-idsvr:
+#    image: curity.azurecr.io/curity/idsvr:7.3.0
+#    ports:
+#      - "6749:6749"
+#      - "8443:8443"
+#    volumes:
+#      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+#      - ./idsvr/main/config-backup.xml:/opt/idsvr/etc/init/config.xml
+#      - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
