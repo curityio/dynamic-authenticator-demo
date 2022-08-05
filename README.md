@@ -45,19 +45,24 @@ need to expose the main instance of the Curity Identity Server to the Internet. 
 
 You will see an authentication method selection screen. Choose `Dynamic Authenticator`.
 
-[img] - selector
+![Authenticator selector](/docs/selector.jpg)
 
 The authenticator needs a way of determining which configuration to use for the authentication. It first collects a username,
 then calls the configuration API with the domain typed into the username field. Type `user@provider1` or `user@provider2` to be redirected
 to the corresponding provider.
 
-[img] - username typed
-[img] - provider 1 login screen
+![Username authenticator](/docs/username.jpg)
+
+![Provider 1 login screen](/docs/provider1.jpg)
 
 At provider1 you can log in with `provider1User/Password1`. At provider2 log in with `provider2User/Password1`.
 
 After logging in with a provider you will see a Debug Attribute Action screen, where you can study the attributes collected from the respective provider.
 Note that even though `user@providerX` was first used as the subject, the final subject is the one obtained from the provider.
+
+### Customizing the Look and Feel
+
+The [Look And Feel](https://curity.io/resources/learn/customize-look-and-feel-simple) editor provides a way of changing the theme of the login forms without the need of editing CSS files and templates. You can use it to quickly change the login screen look.
 
 ## The Created Resources
 
