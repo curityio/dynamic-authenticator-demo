@@ -15,7 +15,8 @@ const configurations = {
         "configuration-url": "https://provider2.example.com:8445/oauth/v2/oauth-anonymous/.well-known/openid-configuration",
         "client-id": "federation-client-2",
         "client-secret": "Password1",
-        "http-client": "dynamic-authenticator-api-client-https"
+        "http-client": "dynamic-authenticator-api-client-https",
+        "use-subject-for-login-hint": true
     }
 }
 

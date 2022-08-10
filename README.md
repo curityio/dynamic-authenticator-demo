@@ -48,17 +48,17 @@ You will see an authentication method selection screen. Choose `Dynamic Authenti
 ![Authenticator selector](/docs/selector.jpg)
 
 The authenticator needs a way of determining which configuration to use for the authentication. It first collects a username,
-then calls the configuration API with the domain typed into the username field. Type `user@provider1` or `user@provider2` to be redirected
+then calls the configuration API with the domain typed into the username field. Type `user1@provider1` or `user2@provider2` to be redirected
 to the corresponding provider.
 
 ![Username authenticator](/docs/username.jpg)
 
 ![Provider 1 login screen](/docs/provider1.jpg)
 
-At provider1 you can log in with `provider1User/Password1`. At provider2 log in with `provider2User/Password1`.
+At provider1 you can log in with `user1/Password1`. At provider2 log in with `user2/Password1`.
 
 After logging in with a provider you will see a Debug Attribute Action screen, where you can study the attributes collected from the respective provider.
-Note that even though `user@providerX` was first used as the subject, the final subject is the one obtained from the provider.
+Note that even though `userX@providerX` was first used as the subject, the final subject is the one obtained from the provider.
 
 ### Customizing the Look and Feel
 

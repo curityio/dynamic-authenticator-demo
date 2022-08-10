@@ -864,7 +864,7 @@ COMMENT ON COLUMN public.tokens.claims IS 'Optional JSON-blob that contains a li
 --
 
 COPY public.accounts (account_id, username, password, email, phone, attributes, active, created, updated) FROM stdin;
-c02d2dde-ee25-11eb-9535-0242ac130005	provider1User	$5$rounds=20000$zXoLTfTLXOUevIIf$xKoU.9qf6qj24vmCp3Jm/R915tcOTzUdp7jRqd9YP69	demo@user.com	\N	{"name": {"givenName": "Demo", "familyName": "User"}, "emails": [{"value": "demo@user.com", "primary": true}], "agreeToTerms": "on", "urn:se:curity:scim:2.0:Devices": []}	1	1627313147	1627313147
+c02d2dde-ee25-11eb-9535-0242ac130005	user1	$5$rounds=20000$zXoLTfTLXOUevIIf$xKoU.9qf6qj24vmCp3Jm/R915tcOTzUdp7jRqd9YP69	demo@user.com	\N	{"name": {"givenName": "Demo", "familyName": "User"}, "emails": [{"value": "demo@user.com", "primary": true}], "agreeToTerms": "on", "urn:se:curity:scim:2.0:Devices": []}	1	1627313147	1627313147
 \.
 
 
