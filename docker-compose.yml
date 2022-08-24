@@ -30,7 +30,7 @@ services:
   # A standalone instance of the Curity Identity Server Provider 1
   #
   provider1-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.2.0
+    image: curity.azurecr.io/curity/idsvr:7.3.1
     ports:
       - "6750:6749"
       - "8444:8443"
@@ -60,7 +60,7 @@ services:
   # A standalone instance of the Curity Identity Server Provider 2
   #
   provider2-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.2.0
+    image: curity.azurecr.io/curity/idsvr:7.3.1
     ports:
       - "6751:6749"
       - "8445:8443"
@@ -76,12 +76,18 @@ services:
   #
   # The instance of the Curity Identity Server that uses the Dynamic Authenticator
   #
-#  authenticator-demo-idsvr:
-#    image: curity.azurecr.io/curity/idsvr:7.3.0
-#    ports:
-#      - "6749:6749"
-#      - "8443:8443"
-#    volumes:
-#      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
-#      - ./idsvr/main/config-backup.xml:/opt/idsvr/etc/init/config.xml
-#      - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
+  authenticator-demo-idsvr:
+    image: curity.azurecr.io/curity/idsvr:7.3.1
+    ports:
+      - "6749:6749"
+      - "8443:8443"
+    volumes:
+      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+      - ./idsvr/main/config-backup.xml:/opt/idsvr/etc/init/config.xml
+      - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
+    environment:
+      PASSWORD: 'Password1'
+      LOGGING_LEVEL: 'DEBUG'
+    extra_hosts:
+      - provider1.example.com:host-gateway
+      - provider2.example.com:host-gateway

@@ -72,12 +72,12 @@ fi
 # Spin up all containers, using the Docker Compose file.
 #
 echo "Deploying resources."
-docker compose --project-name spa down
+docker compose --project-name dynamic-auth down
 
 if [ $REBUILD_API == 1 ]; then
-  docker compose --project-name spa up --detach --build
+  docker compose --project-name dynamic-auth up --detach --build
 else
-  docker compose --project-name spa up --detach
+  docker compose --project-name dynamic-auth up --detach
 fi
 
 if [ $? -ne 0 ]; then
