@@ -55,7 +55,6 @@ services:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'Password1'
       POSTGRES_DB: 'idsvr'
-
   #
   # A standalone instance of the Curity Identity Server Provider 2
   #
@@ -74,18 +73,53 @@ services:
       LOGGING_LEVEL: 'DEBUG'
 
   #
+  # An SQL database used by the Curity Identity Server Provider 3
+  #
+  provider3-data:
+    image: postgres:13.2
+    hostname: dbserver3
+    volumes:
+      - ./idsvr/provider3/data-backup.sql:/docker-entrypoint-initdb.d/data-backup.sql
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'Password1'
+      POSTGRES_DB: 'idsvr'
+  #
+  # A standalone instance of the Curity Identity Server Provider 3
+  #
+  provider3-idsvr:
+    image: curity.azurecr.io/curity/idsvr:7.3.1
+    hostname: provider3.example.com
+    ports:
+      - "6752:6749"
+      - "8446:8443"
+    volumes:
+      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+      - ./idsvr/provider3/config-backup.xml:/opt/idsvr/etc/init/config.xml
+      - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
+    environment:
+      PASSWORD: 'Password1'
+      IDSVR_BASE_URL: "https://provider3.example.com:8446"
+      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/saml/"
+      LOGGING_LEVEL: 'DEBUG'
+
+  #
   # The instance of the Curity Identity Server that uses the Dynamic Authenticator
   #
   authenticator-demo-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.3.1
+    image: curity.azurecr.io/curity/idsvr:7.6.0
+    hostname: login.example.com
     ports:
       - "6749:6749"
       - "8443:8443"
     volumes:
       - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
       - ./idsvr/main/config-backup.xml:/opt/idsvr/etc/init/config.xml
+      - ./idsvr/main/saml-authenticator-config.xml:/opt/idsvr/etc/init/saml-authenticator-config.xml
+      - ./idsvr/main/saml-dynamic-authenticator-config.xml:/opt/idsvr/etc/init/saml-dynamic-authenticator-config.xml
       - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
     environment:
+      IDSVR_BASE_URL: "https://login.example.com:8443"
       PASSWORD: 'Password1'
       LOGGING_LEVEL: 'DEBUG'
     extra_hosts:

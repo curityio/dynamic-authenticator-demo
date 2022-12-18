@@ -1,0 +1,31 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+    <profiles xmlns="https://curity.se/ns/conf/base">
+    <profile>
+    <id>authentication-service</id>
+    <type xmlns:auth="https://curity.se/ns/conf/profile/authentication">auth:authentication-service</type>
+      <settings>
+      <authentication-service xmlns="https://curity.se/ns/conf/profile/authentication">
+      <authenticators>
+      <authenticator>
+        <id>DynamicSaml</id>
+        <authentication-actions>
+          <login>show_attributes</login>
+        </authentication-actions>
+        <description>Dynamic Authenticator Saml</description>
+        <previous-authenticator>username</previous-authenticator>
+        <dynamic xmlns="https://curity.se/ns/ext-conf/dynamic">
+          <configuration-web-service>
+            <hostname>dynamic-authenticator-api</hostname>
+            <port>8080</port>
+            <context>/api/configuration</context>
+            <http-client>http</http-client>
+          </configuration-web-service>
+          <delegate-implementation-type>saml2</delegate-implementation-type>
+        </dynamic>
+      </authenticator>
+      </authenticators>
+      </authentication-service>
+      </settings>
+  </profile>
+  </profiles>
+</config>

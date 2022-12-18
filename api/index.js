@@ -17,6 +17,19 @@ const configurations = {
         "client-secret": "Password1",
         "http-client": "dynamic-authenticator-api-client-https",
         "use-subject-for-login-hint": true
+    },
+    "saml-provider3": {
+      "authentication-context-class-reference": "urn:se:curity:authentication:html-form:Username-Password",
+      "idp-entity-id": "com.example",
+      "idp-url": "https://provider3.example.com:8446/authn/authentication",
+      "issuer-entity-id": "federation-client",
+      "request-signing-key": "default-signing-key",
+      "request-options": {
+        "nameid-format": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+      }
+      "wants-assertion-signed": false,
+      "wants-response-signed": true,
+      "signature-verification-key": "provider3-signature-verification-key"
     }
 }
 
