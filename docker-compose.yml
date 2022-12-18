@@ -41,6 +41,7 @@ services:
     environment:
       PASSWORD: 'Password1'
       IDSVR_BASE_URL: "https://provider1.example.com:8444"
+      CALLBACK_BASE_URL: "https://login.example.com:8443"
       LOGGING_LEVEL: 'DEBUG'
 
   #
@@ -70,6 +71,7 @@ services:
     environment:
       PASSWORD: 'Password1'
       IDSVR_BASE_URL: "https://provider2.example.com:8445"
+      CALLBACK_BASE_URL: "https://login.example.com:8443"
       LOGGING_LEVEL: 'DEBUG'
 
   #
