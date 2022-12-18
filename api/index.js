@@ -18,7 +18,7 @@ const configurations = {
         "http-client": "dynamic-authenticator-api-client-https",
         "use-subject-for-login-hint": true
     },
-    "saml-provider3": {
+    "provider3": {
       "authentication-context-class-reference": "urn:se:curity:authentication:html-form:Username-Password",
       "idp-entity-id": "com.example",
       "idp-url": "https://provider3.example.com:8446/authn/authentication",
@@ -26,10 +26,11 @@ const configurations = {
       "request-signing-key": "default-signing-key",
       "request-options": {
         "nameid-format": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
-      }
+      },
+      "force-authn": "if-requested-by-client",
       "wants-assertion-signed": false,
-      "wants-response-signed": true,
-      "signature-verification-key": "provider3-signature-verification-key"
+      "wants-response-signed": false
+      // "signature-verification-key": "provider3-signature-verification-key"
     }
 }
 

@@ -100,7 +100,7 @@ services:
     environment:
       PASSWORD: 'Password1'
       IDSVR_BASE_URL: "https://provider3.example.com:8446"
-      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/saml/"
+      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/DynamicSaml/"
       LOGGING_LEVEL: 'DEBUG'
 
   #
@@ -115,7 +115,6 @@ services:
     volumes:
       - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
       - ./idsvr/main/config-backup.xml:/opt/idsvr/etc/init/config.xml
-      - ./idsvr/main/saml-authenticator-config.xml:/opt/idsvr/etc/init/saml-authenticator-config.xml
       - ./idsvr/main/saml-dynamic-authenticator-config.xml:/opt/idsvr/etc/init/saml-dynamic-authenticator-config.xml
       - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
     environment:
