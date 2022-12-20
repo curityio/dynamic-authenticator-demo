@@ -102,7 +102,38 @@ services:
     environment:
       PASSWORD: 'Password1'
       IDSVR_BASE_URL: "https://provider3.example.com:8446"
-      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/DynamicSaml/"
+      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/dynamic-authenticator-saml/"
+      LOGGING_LEVEL: 'DEBUG'
+
+  #
+  # An SQL database used by the Curity Identity Server Provider 4
+  #
+  provider4-data:
+    image: postgres:13.2
+    hostname: dbserver4
+    volumes:
+      - ./idsvr/provider4/data-backup.sql:/docker-entrypoint-initdb.d/data-backup.sql
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'Password1'
+      POSTGRES_DB: 'idsvr'
+  #
+  # A standalone instance of the Curity Identity Server Provider 4
+  #
+  provider4-idsvr:
+    image: curity.azurecr.io/curity/idsvr:7.3.1
+    hostname: provider4.example.com
+    ports:
+      - "6753:6749"
+      - "8447:8443"
+    volumes:
+      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+      - ./idsvr/provider4/config-backup.xml:/opt/idsvr/etc/init/config.xml
+      - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
+    environment:
+      PASSWORD: 'Password1'
+      IDSVR_BASE_URL: "https://provider4.example.com:8447"
+      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/dynamic-authenticator-saml/"
       LOGGING_LEVEL: 'DEBUG'
 
   #
@@ -116,8 +147,9 @@ services:
       - "8443:8443"
     volumes:
       - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
-      - ./idsvr/main/config-backup.xml:/opt/idsvr/etc/init/config.xml
-      - ./idsvr/main/saml-dynamic-authenticator-config.xml:/opt/idsvr/etc/init/saml-dynamic-authenticator-config.xml
+      - ./idsvr/main/config-backup.xml:/opt/idsvr/etc/init/01_config.xml
+      - ./idsvr/main/demo-login-config.xml:/opt/idsvr/etc/init/03_demo-login-config.xml
+      - ./idsvr/main/saml-dynamic-authenticator-config.xml:/opt/idsvr/etc/init/02_saml-dynamic-authenticator-config.xml
       - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
     environment:
       IDSVR_BASE_URL: "https://login.example.com:8443"

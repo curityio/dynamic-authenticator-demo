@@ -1,0 +1,53 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+    <profiles xmlns="https://curity.se/ns/conf/base">
+    <profile>
+    <id>authentication-service</id>
+    <type xmlns:auth="https://curity.se/ns/conf/profile/authentication">auth:authentication-service</type>
+      <settings>
+      <authentication-service xmlns="https://curity.se/ns/conf/profile/authentication">
+      <authenticators>
+      <authenticator>
+        <id>demo-login</id>
+        <authentication-actions>
+          <login>select_dynamic_authenticator</login>
+        </authentication-actions>
+        <username xmlns="https://curity.se/ns/ext-conf/username">
+        </username>
+      </authenticator>
+      <authenticator>
+        <id>username</id>
+        <authentication-actions>
+          <login>get-provider-action</login>
+        </authentication-actions>
+        <username xmlns="https://curity.se/ns/ext-conf/username">
+          <auto-submit-preferred-user-name>true</auto-submit-preferred-user-name>
+        </username>
+      </authenticator>
+      </authenticators>
+      <authentication-actions>
+      <authentication-action>
+        <id>select_dynamic_authenticator</id>
+        <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
+          <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
+          <subject-condition>
+            <subject-pattern-condition>
+              <subject-pattern>.*@provider[34]</subject-pattern>
+              <second-factor>
+                <id>dynamic-authenticator-saml</id>
+              </second-factor>
+            </subject-pattern-condition>
+            <subject-pattern-condition>
+              <subject-pattern>.*</subject-pattern>
+              <second-factor>
+                <id>dynamic-authenticator-oidc</id>
+              </second-factor>
+            </subject-pattern-condition>
+          </subject-condition>
+        </multi-factor-condition>
+      </authentication-action>
+      </authentication-actions>
+      </authentication-service>
+      </settings>
+  </profile>
+  </profiles>
+</config>

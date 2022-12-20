@@ -7,7 +7,7 @@
       <authentication-service xmlns="https://curity.se/ns/conf/profile/authentication">
       <authenticators>
       <authenticator>
-        <id>DynamicSaml</id>
+        <id>dynamic-authenticator-saml</id>
         <authentication-actions>
           <login>show_attributes</login>
         </authentication-actions>

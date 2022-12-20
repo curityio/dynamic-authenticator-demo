@@ -55,8 +55,8 @@
           </authentication-actions>
           <authenticators>
             <authenticator>
-              <id>Dynamic1</id>
-              <description>Dynamic Authenticator</description>
+              <id>dynamic-authenticator-oidc</id>
+              <description>Dynamic Authenticator OpenID Connect</description>
               <previous-authenticator>username</previous-authenticator>
               <authentication-actions>
                 <login>show_attributes</login>

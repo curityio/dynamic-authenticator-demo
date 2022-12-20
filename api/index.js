@@ -22,7 +22,7 @@ const configurations = {
       "authentication-context-class-reference": "urn:se:curity:authentication:html-form:Username-Password",
       "idp-entity-id": "com.example",
       "idp-url": "https://provider3.example.com:8446/authn/authentication",
-      "issuer-entity-id": "federation-client",
+      "issuer-entity-id": "federation-client-3",
       "request-signing-key": "default-signing-key",
       "request-options": {
         "nameid-format": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
@@ -31,11 +31,21 @@ const configurations = {
       "wants-assertion-signed": false,
       "wants-response-signed": false
       // "signature-verification-key": "provider3-signature-verification-key"
+    },
+    "provider4": {
+      "authentication-context-class-reference": "urn:se:curity:authentication:html-form:Username-Password",
+      "idp-entity-id": "com.example",
+      "idp-url": "https://provider4.example.com:8447/authn/authentication",
+      "issuer-entity-id": "federation-client-4",
+      "wants-assertion-signed": false,
+      "wants-response-signed": false
     }
 }
 
 app.get('/api/configuration', (req, res) => {
     const fid = req.query['fid']
+
+    console.log(`Loading configuration for ${fid}`)
     const config = configurations[fid]
 
     if (!config) {

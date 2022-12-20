@@ -13,20 +13,20 @@
       </admin-service>
       <themes>
         <default-theme>
-          <theme-css-properties>Cjpyb290IHsKICAtLXBhZ2UtYmFja2dyb3VuZC1jb2xvcjogI2ZiZTFmNTsKICAtLXdlbGwtYmFja2dyb3VuZC1jb2xvcjogI2Q4ZGFkYTsKICAtLXdlbGwtYm9yZGVyLWNvbG9yOiAjY2JjOGM5OwogIC0td2VsbC1ib3JkZXItd2lkdGg6IDZweDsKICAtLWxvZ2luLWxvZ28tbWF4LXdpZHRoOiAzMDBweDsKICAtLWxvZ2luLWxvZ28tbWF4LWhlaWdodDogNjBweDsKfQ==</theme-css-properties>
-          <template-variables>
-            <name>_configured_cspImgsrc</name>
-            <value>img-src 'self' data:;</value>
-          </template-variables>
-          <template-variables>
-            <name>_configured_logo_inside</name>
-            <value>true</value>
-          </template-variables>
-          <template-variables>
-            <name>_configured_logo_path</name>
-            <value>data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjYuOTMgNjcuNTYiPjxkZWZzPjxzdHlsZT4uY2xzLTF7Zm9udC1zaXplOjYwcHg7ZmlsbDojMmM1NjI5O2ZvbnQtZmFtaWx5OlBob3NwaGF0ZS1JbmxpbmUsIFBob3NwaGF0ZTt9PC9zdHlsZT48L2RlZnM+PHRleHQgY2xhc3M9ImNscy0xIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5LjAzIDUzLjYxKSI+UHJvdmlkZXIgMjwvdGV4dD48L3N2Zz4=</value>
-          </template-variables>
-        </default-theme>
+         <theme-css-properties>Cjpyb290IHsKICAtLXBhZ2UtYmFja2dyb3VuZC1jb2xvcjogI2JjY2RlMTsKICAtLXdlbGwtYmFja2dyb3VuZC1jb2xvcjogI2JjZTBlNjsKICAtLXdlbGwtYm9yZGVyLWNvbG9yOiAjY2JjOGM5OwogIC0td2VsbC1ib3JkZXItd2lkdGg6IDZweDsKICAtLWxvZ2luLWxvZ28tbWF4LXdpZHRoOiAzMDBweDsKICAtLWxvZ2luLWxvZ28tbWF4LWhlaWdodDogNjBweDsKfQ==</theme-css-properties>
+         <template-variables>
+           <name>_configured_cspImgsrc</name>
+           <value>img-src 'self' data:;</value>
+         </template-variables>
+         <template-variables>
+           <name>_configured_logo_inside</name>
+           <value>true</value>
+         </template-variables>
+         <template-variables>
+           <name>_configured_logo_path</name>
+           <value>data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMTkuNzQgNjYuNDciPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTF7Zm9udC1zaXplOjQ1cHg7Zm9udC1mYW1pbHk6cGFweXJ1cywgUGFycHlydXM7fQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPHRleHQgY2xhc3M9ImNscy0xIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2LjQ2IDQ1Ljc2KSI+UHJvdmlkZXIgMzwvdGV4dD4KICA8bGluZSBjbGFzcz0iY2xzLTIiIHgxPSIxOS4yMyIgeTE9IjUzLjQiIHgyPSIyMDguMzQiIHkyPSI1My40Ii8+CiAgPGxpbmUgY2xhc3M9ImNscy0yIiB4MT0iNy44MyIgeTE9IjU4LjMiIHgyPSIxOTYuOTUiIHkyPSI1OC4zIi8+Cjwvc3ZnPgo=</value>
+         </template-variables>
+       </default-theme>
       </themes>
       <services>
         <zones>
@@ -42,14 +42,6 @@
           <endpoints>authentication-service-anonymous</endpoints>
           <endpoints>authentication-service-authentication</endpoints>
           <endpoints>authentication-service-registration</endpoints>
-          <endpoints>token-service-anonymous</endpoints>
-          <endpoints>token-service-assisted-token</endpoints>
-          <endpoints>token-service-authorize</endpoints>
-          <endpoints>token-service-introspect</endpoints>
-          <endpoints>token-service-revoke</endpoints>
-          <endpoints>token-service-session</endpoints>
-          <endpoints>token-service-token</endpoints>
-          <endpoints>token-service-userinfo</endpoints>
         </service-role>
       </services>
     </environment>
@@ -60,10 +52,10 @@
       <type xmlns:auth="https://curity.se/ns/conf/profile/authentication">auth:authentication-service</type>
       <settings>
         <authentication-service xmlns="https://curity.se/ns/conf/profile/authentication">
-          <protocol-id>saml</protocol-id>
           <redirect-url-whitelist>
             <url>#{SAML_SP_URL}</url>
           </redirect-url-whitelist>
+          <protocol-id>saml</protocol-id>
           <authenticators>
             <authenticator>
               <id>Username-Password</id>
@@ -82,7 +74,7 @@
               <id>saml</id>
               <saml>
                 <signing-key>default-signing-key</signing-key>
-                <recipient-entity-id>federation-client</recipient-entity-id>
+                <recipient-entity-id>federation-client-3</recipient-entity-id>
                 <acs-url>#{SAML_SP_URL}</acs-url>
               </saml>
             </protocol>
@@ -104,277 +96,6 @@
           <id>authentication-service-registration</id>
           <uri>/authn/registration</uri>
           <endpoint-kind>auth-registration</endpoint-kind>
-        </endpoint>
-      </endpoints>
-      <token-issuers>
-        <default-token-issuer>
-          <jwt-issuer-settings>
-            <signing-key-id>default-signing-key</signing-key-id>
-          </jwt-issuer-settings>
-          <default-data-source>default-datasource</default-data-source>
-        </default-token-issuer>
-      </token-issuers>
-    </profile>
-    <profile>
-      <id>token-service</id>
-      <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
-      <settings>
-        <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
-          <authentication-service>
-            <authentication-profile>authentication-service</authentication-profile>
-          </authentication-service>
-          <client-capabilities>
-            <code>
-            </code>
-            <implicit/>
-            <resource-owner-password-credentials>
-              <credential-manager>default-credential-manager</credential-manager>
-            </resource-owner-password-credentials>
-            <client-credentials/>
-            <introspection/>
-            <token-exchange/>
-            <assisted-token>
-            </assisted-token>
-          </client-capabilities>
-          <scopes>
-            <scope>
-              <id>address</id>
-              <description>OpenId Connect address scope</description>
-              <claims>address</claims>
-            </scope>
-            <scope>
-              <id>email</id>
-              <description>OpenId Connect email scope</description>
-              <claims>email</claims>
-              <claims>email_verified</claims>
-            </scope>
-            <scope>
-              <id>openid</id>
-              <description>Standard OpenID Connect scope</description>
-            </scope>
-            <scope>
-              <id>phone</id>
-              <description>OpenId Connect phone scope</description>
-              <claims>phone_number</claims>
-              <claims>phone_number_verified</claims>
-            </scope>
-            <scope>
-              <id>profile</id>
-              <description>OpenId Connect profile scope</description>
-              <claims>birthdate</claims>
-              <claims>family_name</claims>
-              <claims>gender</claims>
-              <claims>given_name</claims>
-              <claims>locale</claims>
-              <claims>middle_name</claims>
-              <claims>name</claims>
-              <claims>nickname</claims>
-              <claims>picture</claims>
-              <claims>preferred_username</claims>
-              <claims>profile</claims>
-              <claims>updated_at</claims>
-              <claims>website</claims>
-              <claims>zoneinfo</claims>
-            </scope>
-          </scopes>
-          <claims>
-            <claim>
-              <name>address</name>
-              <description>OpenID Connect address claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>birthdate</name>
-              <description>OpenID Connect birthdate claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>email</name>
-              <description>OpenID Connect email claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>email_verified</name>
-              <description>OpenID Connect email_verified claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>family_name</name>
-              <description>OpenID Connect family_name claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>gender</name>
-              <description>OpenID Connect gender claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>given_name</name>
-              <description>OpenID Connect given_name claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>locale</name>
-              <description>OpenID Connect locale claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>middle_name</name>
-              <description>OpenID Connect middle_name claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>name</name>
-              <description>OpenID Connect name claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>nickname</name>
-              <description>OpenID Connect nickname claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>phone_number</name>
-              <description>OpenID Connect phone_number claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>phone_number_verified</name>
-              <description>OpenID Connect phone_number_verified claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>picture</name>
-              <description>OpenID Connect picture claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>preferred_username</name>
-              <description>OpenID Connect preferred_username claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>profile</name>
-              <description>OpenID Connect profile claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>updated_at</name>
-              <description>OpenID Connect updated_at claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>website</name>
-              <description>OpenID Connect website claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>zoneinfo</name>
-              <description>OpenID Connect zoneinfo claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claims-value-provider>
-              <id>account-manager-claims-provider</id>
-              <account-manager-claims-provider xmlns="https://curity.se/ns/ext-conf/account-manager-claims-provider">
-                <account-manager>
-                  <id>default-account-manager</id>
-                </account-manager>
-              </account-manager-claims-provider>
-            </claims-value-provider>
-            <claims-mappers>
-              <claims-mapper>
-                <id>default</id>
-                <userinfo>
-                  <claim>address</claim>
-                  <claim>birthdate</claim>
-                  <claim>email</claim>
-                  <claim>email_verified</claim>
-                  <claim>family_name</claim>
-                  <claim>gender</claim>
-                  <claim>given_name</claim>
-                  <claim>locale</claim>
-                  <claim>middle_name</claim>
-                  <claim>name</claim>
-                  <claim>nickname</claim>
-                  <claim>phone_number</claim>
-                  <claim>phone_number_verified</claim>
-                  <claim>picture</claim>
-                  <claim>preferred_username</claim>
-                  <claim>profile</claim>
-                  <claim>updated_at</claim>
-                  <claim>website</claim>
-                  <claim>zoneinfo</claim>
-                </userinfo>
-              </claims-mapper>
-              <default-claims-mapper>default</default-claims-mapper>
-            </claims-mappers>
-          </claims>
-          <openid-connect>
-            <expose-metadata>
-            </expose-metadata>
-          </openid-connect>
-          <client-store>
-            <config-backed>
-              <client>
-                <id>federation-client-2</id>
-                <client-name>federation-client-2</client-name>
-                <description>The client that makes the federated login.</description>
-                <secret>$5$TCfYst/ysngW7RbV$rMLasvlJpnQ0wmFoeTrdIHPjVdnsqOVelkqawZ.fZ17</secret>
-                <redirect-uris>https://localhost:8443/authn/authentication/Dynamic1/callback</redirect-uris>
-                <scope>openid</scope>
-                <scope>profile</scope>
-                <user-authentication />
-                <capabilities>
-                  <code>
-                  </code>
-                </capabilities>
-                <validate-port-on-loopback-interfaces>true</validate-port-on-loopback-interfaces>
-              </client>
-            </config-backed>
-          </client-store>
-        </authorization-server>
-      </settings>
-      <endpoints>
-        <endpoint>
-          <id>token-service-anonymous</id>
-          <uri>/oauth/v2/oauth-anonymous</uri>
-          <client-authentication>disallow</client-authentication>
-          <endpoint-kind>oauth-anonymous</endpoint-kind>
-        </endpoint>
-        <endpoint>
-          <id>token-service-assisted-token</id>
-          <uri>/oauth/v2/oauth-assisted-token</uri>
-          <endpoint-kind>oauth-assisted-token</endpoint-kind>
-        </endpoint>
-        <endpoint>
-          <id>token-service-authorize</id>
-          <uri>/oauth/v2/oauth-authorize</uri>
-          <endpoint-kind>oauth-authorize</endpoint-kind>
-        </endpoint>
-        <endpoint>
-          <id>token-service-introspect</id>
-          <uri>/oauth/v2/oauth-introspect</uri>
-          <endpoint-kind>oauth-introspect</endpoint-kind>
-        </endpoint>
-        <endpoint>
-          <id>token-service-revoke</id>
-          <uri>/oauth/v2/oauth-revoke</uri>
-          <endpoint-kind>oauth-revoke</endpoint-kind>
-        </endpoint>
-        <endpoint>
-          <id>token-service-session</id>
-          <uri>/oauth/v2/oauth-session</uri>
-          <endpoint-kind>oauth-session</endpoint-kind>
-        </endpoint>
-        <endpoint>
-          <id>token-service-token</id>
-          <uri>/oauth/v2/oauth-token</uri>
-          <endpoint-kind>oauth-token</endpoint-kind>
-        </endpoint>
-        <endpoint>
-          <id>token-service-userinfo</id>
-          <uri>/oauth/v2/oauth-userinfo</uri>
-          <endpoint-kind>oauth-userinfo</endpoint-kind>
         </endpoint>
       </endpoints>
       <token-issuers>
