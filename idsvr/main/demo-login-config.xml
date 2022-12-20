@@ -11,6 +11,7 @@
         <authentication-actions>
           <login>select_dynamic_authenticator</login>
         </authentication-actions>
+        <description>Demo Login</description>
         <username xmlns="https://curity.se/ns/ext-conf/username">
         </username>
       </authenticator>
