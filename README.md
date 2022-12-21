@@ -24,13 +24,11 @@ You will also need a license for the Curity Identity Server. If you don't have o
 
 Follow these steps in order to run the demo:
 
-- Copy `hooks/pre-commit` to `./git/hooks`. (This is an optional step, and you should do it if you plan to commit anything to this repo.
-  The hook will make sure that you don't accidentally commit the license.)
 - Copy the JSON license file to `/idsvr`.
 - Add the following domains to `/etc/hosts`:
 
 ```
-127.0.0.1 provider1.example.com provider2.example.com
+127.0.0.1 login.example.com provider1.example.com provider2.example.com provider3.example.com provider4.example.com
 ```
 
 - Run the `./deploy.sh` script. It will create the required certificates and containers.
@@ -38,24 +36,32 @@ Follow these steps in order to run the demo:
 ## Log In Using the Dynamic Authenticator
 
 You can log in to the main instance of the Curity Identity Server, by starting an OAuth flow for the client `dynamic-authenticator-demo`,
-e.g., navigate your browser to: `https://localhost:8443/oauth/v2/oauth-authorize?client_id=dynamic-authenticator-demo&response_type=code&scope=openid&redirect_uri=http://localhost`.
-(You can use [OAuth.tools](https://curity.io/resources/learn/test-using-oauth-tools/) to perform OAuth flows, but you will
-need to expose the main instance of the Curity Identity Server to the Internet. Here is a
-[tutorial](https://curity.io/resources/learn/expose-local-curity-ngrok/) that shows how to do it using a free tool called `ngrok`.)
+e.g., navigate your browser to:
 
-You will see an authentication method selection screen. Choose `Dynamic Authenticator`.
+```
+https://login.example.com:8443/oauth/v2/oauth-authorize?client_id=dynamic-authenticator-demo&response_type=code&scope=openid&redirect_uri=http://localhost
+```
+
+You will see an authentication method selection screen. Choose `Demo Login`.
 
 ![Authenticator selector](/docs/selector.jpg)
 
 The authenticator needs a way of determining which configuration to use for the authentication. It first collects a username,
-then calls the configuration API with the domain typed into the username field. Type `user1@provider1` or `user2@provider2` to be redirected
-to the corresponding provider.
+then calls the configuration API with the domain typed into the username field. Type `user1@provider1` or `user2@provider2` for federating to an OIDC provider,
+`user3@provider3` or `user4@provider4` for federating to an SAML IdP.
 
 ![Username authenticator](/docs/username.jpg)
 
 ![Provider 1 login screen](/docs/provider1.jpg)
 
-At provider1 you can log in with `user1/Password1`. At provider2 log in with `user2/Password1`.
+Use one of the following credentials to log in at the different providers:
+
+| Provider  | Username | Password    |
+|-----------|----------|-------------|
+| provider1 | `user1`  | `Password1` |
+| provider2 | `user2`  | `Password1` |
+| provider3 | `user3`  | `Password1` |
+| provider4 | `user4`  | `Password1` |
 
 After logging in with a provider you will see a Debug Attribute Action screen, where you can study the attributes collected from the respective provider.
 Note that even though `userX@providerX` was first used as the subject, the final subject is the one obtained from the provider.
@@ -74,7 +80,7 @@ A Curity Identity Server instance that serves as an external OIDC Provider.
 
 Endpoints:
 - OIDC metadata: https://provider1.example.com:8444/oauth/v2/oauth-anonymous/.well-known/oidc-configuration
-- admin UI: https://localhost:6750/admin
+- admin UI: https://provider1.example.com:6750/admin
 
 ### Provider 2
 
@@ -82,15 +88,32 @@ A Curity Identity Server instance that serves as an external OIDC Provider.
 
 Endpoints:
 - OIDC metadata: https://provider2.example.com:8445/oauth/v2/oauth-anonymous/.well-known/oidc-configuration
-- admin UI: https://localhost:6751/admin
+- admin UI: https://provider2.example.com:6751/admin
+
+### Provider 3
+
+A Curity Identity Server instance that serves as an external SAML IdP.
+
+Endpoints:
+- SAML IdP URL: https://provider3.example.com:8446/authn/authentication
+- admin UI: https://provider3.example.com:6752/admin
+
+### Provider 4
+
+A Curity Identity Server instance that serves as an external SAML IdP.
+
+Endpoints:
+- SAML IdP URL: https://provider4.example.com:8446/authn/authentication
+- admin UI: https://provider4.example.com:6753/admin
+
 
 ### Main instance
 
 A Curity Identity Server instance that uses the dynamic authenticator.
 
 Endpoints:
-- OIDC metadata: https://localhost:8443/oauth/v2/oauth-anonymous/.well-known/oidc-configuration
-- admin UI: https://localhost:6749/admin
+- OIDC metadata: https://login.example.com:8443/oauth/v2/oauth-anonymous/.well-known/oidc-configuration
+- admin UI: https://login.example.com:6749/admin
 
 ### The Configuration API
 
@@ -107,7 +130,7 @@ will restart all containers, and the Curity Identity Server instances will have 
 
 If you change the API code, run the script with the `--rebuild-api` option. This will refresh the API code in the container.
 
-If you need the certificates to be renewed, run the script with the `--regenerate-certs` option. 
+If you need the certificates to be renewed, run the script with the `--regenerate-certs` option.
 
 ## Teardown
 
@@ -120,4 +143,4 @@ Have a look at this [tutorial](https://curity.io/resources/learn/dynamic-authent
 If you want more information about the Curity Identity Server, Identity and Access Management, OAuth or OpenID Connect,
 then have a look at the [resources](https://curity.io/resources/) section of the [Curity](https://curity.io) website.
 
-If you have any questions or comments don't hesitate to open an issue in this repository or contact us. 
+If you have any questions or comments don't hesitate to open an issue in this repository or contact us.
