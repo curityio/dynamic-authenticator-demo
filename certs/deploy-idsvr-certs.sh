@@ -9,8 +9,8 @@
 #
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-provider_ports=(6750 6751)
-providers=("provider1" "provider2")
+provider_ports=(6750 6751 6752 5753)
+providers=("provider1" "provider2" "provider3" "provider4")
 
 RESTCONF_BASE_URL='https://localhost'
 RESTCONF_BASE_PATH='/admin/api/restconf/data'

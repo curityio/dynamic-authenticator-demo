@@ -147,9 +147,17 @@ services:
       - "8443:8443"
     volumes:
       - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+      # basic setup with a username authenticator and debug action in place
       - ./idsvr/main/config-backup.xml:/opt/idsvr/etc/init/01_config.xml
-      - ./idsvr/main/demo-login-config.xml:/opt/idsvr/etc/init/03_demo-login-config.xml
+      # dynamic authenticators for OIDC and SAML
+      - ./idsvr/main/oidc-dynamic-authenticator-config.xml:/opt/idsvr/etc/init/02_oidc-dynamic-authenticator-config.xml
       - ./idsvr/main/saml-dynamic-authenticator-config.xml:/opt/idsvr/etc/init/02_saml-dynamic-authenticator-config.xml
+      # script to retrieve federation id from subject
+      - ./idsvr/main/transformation-procedure-get-federation-id.js:/opt/idsvr/etc/init/transformation-procedures/get-federation-id.js
+      # demo login flow for this deployment that uses the different dynamic authenticators and scripts
+      - ./idsvr/main/demo-login-config.xml:/opt/idsvr/etc/init/03_demo-login-config.xml
+      - ./idsvr/main/filter-procedure-login-demo.js:/opt/idsvr/etc/init/filter-procedures/authenticator/show-demo-login-authenticator-only.js
+      # log settings
       - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
     environment:
       IDSVR_BASE_URL: "https://login.example.com:8443"

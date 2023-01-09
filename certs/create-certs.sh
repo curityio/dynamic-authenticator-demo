@@ -63,7 +63,7 @@ openssl req \
     -days 3650
 echo 'Successfully created Root CA'
 
-providers=("provider1" "provider2")
+providers=("provider1" "provider2" "provider3" "provider4")
 
 for provider in ${providers[@]}
 do

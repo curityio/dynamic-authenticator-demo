@@ -43,9 +43,9 @@
         <authentication-service xmlns="https://curity.se/ns/conf/profile/authentication">
           <authentication-actions>
             <authentication-action>
-              <id>get-provider-action</id>
+              <id>get-federation-id-action</id>
               <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
-                <transformation-procedure>get-provider</transformation-procedure>
+                <transformation-procedure>get-federation-id</transformation-procedure>
               </script-transformer>
             </authentication-action>
             <authentication-action>
@@ -55,26 +55,9 @@
           </authentication-actions>
           <authenticators>
             <authenticator>
-              <id>dynamic-authenticator-oidc</id>
-              <description>Dynamic Authenticator OpenID Connect</description>
-              <previous-authenticator>username</previous-authenticator>
-              <authentication-actions>
-                <login>show_attributes</login>
-              </authentication-actions>
-              <dynamic xmlns="https://curity.se/ns/ext-conf/dynamic">
-                <configuration-web-service>
-                  <hostname>dynamic-authenticator-api</hostname>
-                  <port>8080</port>
-                  <context>/api/configuration</context>
-                  <http-client>http</http-client>
-                </configuration-web-service>
-                <delegate-implementation-type>oidc</delegate-implementation-type>
-              </dynamic>
-            </authenticator>
-            <authenticator>
               <id>username</id>
               <authentication-actions>
-                <login>get-provider-action</login>
+                <login>get-federation-id-action</login>
               </authentication-actions>
               <username xmlns="https://curity.se/ns/ext-conf/username">
               </username>
@@ -463,12 +446,6 @@
   </facilities>
   <processing xmlns="https://curity.se/ns/conf/base">
     <license-key></license-key>
-    <procedures>
-      <transformation-procedure>
-        <id>get-provider</id>
-        <script>ZnVuY3Rpb24gcmVzdWx0KGNvbnRleHQpIHsKCiAgICB2YXIgYXR0cmlidXRlcyA9IGNvbnRleHQuYXR0cmlidXRlTWFwOwogICAgdmFyIHN1YiA9IGF0dHJpYnV0ZXMuc3ViamVjdDsKICAgIHZhciBpbmRleE9mQXQgPSBzdWIuaW5kZXhPZignQCcpOwoKICAgIC8vIGZlZGVyYXRpb25JZCB3aGljaCB3aWxsIGJlIHNlbnQgdG8gdGhlIGV4dGVybmFsIGNvbmZpZ3VyYXRpb24gc291cmNlCiAgICB2YXIgZmVkZXJhdGlvbklkID0gaW5kZXhPZkF0ID49IDAgPyBzdWIuc3Vic3RyaW5nKGluZGV4T2ZBdCArIDEpIDogJ2RlZmF1bHQnOwoKICAgIHZhciBzdWJqZWN0ID0gaW5kZXhPZkF0ID49IDAgPyBzdWIuc3Vic3RyaW5nKDAsIGluZGV4T2ZBdCkgOiBzdWI7CgogICAgLy8gdGhlIGR5bmFtaWMgYXV0aGVudGljYXRvciB3aWxsIGxvb2sgYXQgdGhpcyBhdHRyaWJ1dGUgZm9yIHRoZSBmZWRlcmF0aW9uIElELAogICAgLy8gb3IgdXNlICdkZWZhdWx0JyBpZiBpdCdzIG5vdCBmb3VuZC4KICAgIGF0dHJpYnV0ZXNbJ2R5bmFtaWMtYXV0aGVudGljYXRvci1mZWRlcmF0aW9uLWlkJ10gPSBmZWRlcmF0aW9uSWQ7CiAgICBhdHRyaWJ1dGVzLnN1YmplY3QgPSBzdWJqZWN0OwoKICAgIHJldHVybiBhdHRyaWJ1dGVzOwp9</script>
-      </transformation-procedure>
-    </procedures>
     <account-managers>
       <account-manager>
         <id>default-account-manager</id>
