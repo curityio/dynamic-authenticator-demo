@@ -48,8 +48,8 @@ Enter the following URL in your browser to start an authentication:
 https://login.example.com:8443/oauth/v2/oauth-authorize?client_id=dynamic-authenticator-demo&response_type=code&scope=openid&redirect_uri=http://localhost
 ```
 
-Type `user1@provider1` or `user2@provider2` for federating to an OIDC provider,
-`user3@provider3` or `user4@provider4` for federating to an SAML IdP.
+In the username prompt, type `user1@provider1` or `user2@provider2` for federating to an OIDC provider,
+`user3@provider3` or `user4@provider4` for federating to a SAML IdP.
 
 ![Username authenticator](/docs/username.jpg)
 

@@ -140,7 +140,7 @@ services:
   # The instance of the Curity Identity Server that uses the Dynamic Authenticator
   #
   authenticator-demo-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.6.0
+    image: curity.azurecr.io/curity/idsvr:latest
     hostname: login.example.com
     ports:
       - "6749:6749"
