@@ -30,7 +30,7 @@ services:
   # A standalone instance of the Curity Identity Server Provider 1
   #
   provider1-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.3.1
+    image: curity.azurecr.io/curity/idsvr:latest
     ports:
       - "6750:6749"
       - "8444:8443"
@@ -60,7 +60,7 @@ services:
   # A standalone instance of the Curity Identity Server Provider 2
   #
   provider2-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.3.1
+    image: curity.azurecr.io/curity/idsvr:latest
     ports:
       - "6751:6749"
       - "8445:8443"
@@ -90,7 +90,7 @@ services:
   # A standalone instance of the Curity Identity Server Provider 3
   #
   provider3-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.3.1
+    image: curity.azurecr.io/curity/idsvr:latest
     hostname: provider3.example.com
     ports:
       - "6752:6749"
@@ -121,7 +121,7 @@ services:
   # A standalone instance of the Curity Identity Server Provider 4
   #
   provider4-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.3.1
+    image: curity.azurecr.io/curity/idsvr:latest
     hostname: provider4.example.com
     ports:
       - "6753:6749"
