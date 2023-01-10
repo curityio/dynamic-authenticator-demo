@@ -1,0 +1,80 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+    <profiles xmlns="https://curity.se/ns/conf/base">
+    <profile>
+    <id>authentication-service</id>
+    <type xmlns:auth="https://curity.se/ns/conf/profile/authentication">auth:authentication-service</type>
+      <settings>
+      <authentication-service xmlns="https://curity.se/ns/conf/profile/authentication">
+      <authenticators>
+      <authenticator>
+        <id>demo-login</id>
+        <authentication-actions>
+          <login>select_dynamic_authenticator</login>
+        </authentication-actions>
+        <description>Demo Login</description>
+        <username xmlns="https://curity.se/ns/ext-conf/username">
+        </username>
+      </authenticator>
+      <authenticator>
+        <id>username</id>
+        <authentication-actions>
+          <login>get-federation-id-action</login>
+        </authentication-actions>
+        <username xmlns="https://curity.se/ns/ext-conf/username">
+          <auto-submit-preferred-user-name>true</auto-submit-preferred-user-name>
+        </username>
+      </authenticator>
+      </authenticators>
+      <authentication-actions>
+      <authentication-action>
+        <id>select_dynamic_authenticator</id>
+        <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
+          <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
+          <subject-condition>
+            <subject-pattern-condition>
+              <subject-pattern>.*@provider[34]</subject-pattern>
+              <second-factor>
+                <id>dynamic-authenticator-saml</id>
+              </second-factor>
+            </subject-pattern-condition>
+            <subject-pattern-condition>
+              <subject-pattern>.*</subject-pattern>
+              <second-factor>
+                <id>dynamic-authenticator-oidc</id>
+              </second-factor>
+            </subject-pattern-condition>
+          </subject-condition>
+        </multi-factor-condition>
+      </authentication-action>
+      </authentication-actions>
+      <authenticator-filters>
+      <authenticator-filter>
+        <id>filter-demo-login</id>
+        <script-filter xmlns="https://curity.se/ns/conf/authenticator-filters/script">
+          <authenticator-filter-procedure>show-demo-login-authenticator-only</authenticator-filter-procedure>
+        </script-filter>
+      </authenticator-filter>
+      </authenticator-filters>
+      </authentication-service>
+      </settings>
+  </profile>
+  <profile>
+    <id>token-service</id>
+    <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
+    <settings>
+      <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
+        <client-store>
+          <config-backed>
+            <client>
+              <id>dynamic-authenticator-demo</id>
+              <user-authentication>
+                <authenticator-filters>filter-demo-login</authenticator-filters>
+              </user-authentication>
+            </client>
+          </config-backed>
+        </client-store>
+      </authorization-server>
+    </settings>
+  </profile>
+  </profiles>
+</config>
