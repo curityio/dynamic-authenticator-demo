@@ -4,8 +4,11 @@ This repository contains resources needed to demonstrate the usage of a Dynamic 
 The resources created with scripts from this repo are:
 
 - Two separate instances of the Curity Identity Server that serve as two external OIDC Providers.
-- A node API that serves configuration required by the dynamic authenticator.
-- An instance of the Curity Identity Server with the dynamic authenticator configured.
+- Two separate instances of the Curity Identity Server that serve as two external SAML Providers.
+- A node API that serves configuration required by the Dynamic Authenticator.
+- An instance of the Curity Identity Server with two types of Dynamic Authenticators configured.
+
+Note, that the OIDC and SAML providers are just added for demonstration purpose and to make this example self-contained. Don't bother the extra instances of the Curity Identity Server and related data stores. In a proper environment, those providers are external and maintained by a third party. To simulate a real-world scenario, the providers in this example are assigned different domains. See [The Created Resources](#the-created-resources) for the details.
 
 ## Prerequisites
 
@@ -33,28 +36,24 @@ Follow these steps in order to run the demo:
 
 - Run the `./deploy.sh` script. It will create the required certificates and containers.
 
-## Log In Using the Dynamic Authenticator
+## Log in Using the Dynamic Authenticator
 
-You can log in to the main instance of the Curity Identity Server, by starting an OAuth flow for the client `dynamic-authenticator-demo`,
-e.g., navigate your browser to:
+You can log in to the main instance of the Curity Identity Server, by starting an OAuth flow for the client `dynamic-authenticator-demo`.
+
+The dynamic authenticator needs a way of determining which configuration to use for the authentication. Therefore, it first collects a username, then calls the configuration API with the domain typed into the username field.
+
+Enter the following URL in your browser to start an authentication:
 
 ```
 https://login.example.com:8443/oauth/v2/oauth-authorize?client_id=dynamic-authenticator-demo&response_type=code&scope=openid&redirect_uri=http://localhost
 ```
 
-You will see an authentication method selection screen. Choose `Demo Login`.
-
-![Authenticator selector](/docs/selector.jpg)
-
-The authenticator needs a way of determining which configuration to use for the authentication. It first collects a username,
-then calls the configuration API with the domain typed into the username field. Type `user1@provider1` or `user2@provider2` for federating to an OIDC provider,
+Type `user1@provider1` or `user2@provider2` for federating to an OIDC provider,
 `user3@provider3` or `user4@provider4` for federating to an SAML IdP.
 
 ![Username authenticator](/docs/username.jpg)
 
-![Provider 1 login screen](/docs/provider1.jpg)
-
-Use one of the following credentials to log in at the different providers:
+You may now log in at the external provider. Use one of the following credentials to log in at the different providers:
 
 | Provider  | Username | Password    |
 |-----------|----------|-------------|
@@ -63,8 +62,15 @@ Use one of the following credentials to log in at the different providers:
 | provider3 | `user3`  | `Password1` |
 | provider4 | `user4`  | `Password1` |
 
+
+![Provider 1 login screen](/docs/provider1.jpg)
+
 After logging in with a provider you will see a Debug Attribute Action screen, where you can study the attributes collected from the respective provider.
 Note that even though `userX@providerX` was first used as the subject, the final subject is the one obtained from the provider.
+
+| Dynamic Authenticator using OIDC | Dynamic Authenticator using SAML |
+| --- | --- |
+| ![Result of Debug Attribute Action for OIDC](/docs/debug-attribute-action-result-oidc.jpg) | ![Result of Debug Attribute Action for SAML](/docs/debug-attribute-action-result-saml.jpg) |
 
 ### Customizing the Look and Feel
 
