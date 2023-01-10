@@ -9,7 +9,7 @@
 #
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-provider_ports=(6750 6751 6752 5753)
+provider_ports=(6750 6751 6752 6753)
 providers=("provider1" "provider2" "provider3" "provider4")
 
 RESTCONF_BASE_URL='https://localhost'
