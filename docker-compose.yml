@@ -102,7 +102,7 @@ services:
     environment:
       PASSWORD: 'Password1'
       IDSVR_BASE_URL: "https://provider3.example.com:8446"
-      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/dynamic-authenticator-saml/"
+      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/dynamic-authenticator-saml"
       LOGGING_LEVEL: 'DEBUG'
 
   #
@@ -133,7 +133,7 @@ services:
     environment:
       PASSWORD: 'Password1'
       IDSVR_BASE_URL: "https://provider4.example.com:8447"
-      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/dynamic-authenticator-saml/"
+      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/dynamic-authenticator-saml"
       LOGGING_LEVEL: 'DEBUG'
 
   #

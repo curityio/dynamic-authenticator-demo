@@ -85,7 +85,7 @@ The demo creates the following resources. Some useful endpoints are provided for
 A Curity Identity Server instance that serves as an external OIDC Provider.
 
 Endpoints:
-- OIDC metadata: https://provider1.example.com:8444/oauth/v2/oauth-anonymous/.well-known/oidc-configuration
+- OIDC metadata: https://provider1.example.com:8444/oauth/v2/oauth-anonymous/.well-known/openid-configuration
 - admin UI: https://provider1.example.com:6750/admin
 
 ### Provider 2
@@ -93,7 +93,7 @@ Endpoints:
 A Curity Identity Server instance that serves as an external OIDC Provider.
 
 Endpoints:
-- OIDC metadata: https://provider2.example.com:8445/oauth/v2/oauth-anonymous/.well-known/oidc-configuration
+- OIDC metadata: https://provider2.example.com:8445/oauth/v2/oauth-anonymous/.well-known/openid-configuration
 - admin UI: https://provider2.example.com:6751/admin
 
 ### Provider 3
@@ -118,7 +118,7 @@ Endpoints:
 A Curity Identity Server instance that uses the dynamic authenticator.
 
 Endpoints:
-- OIDC metadata: https://login.example.com:8443/oauth/v2/oauth-anonymous/.well-known/oidc-configuration
+- OIDC metadata: https://login.example.com:8443/oauth/v2/oauth-anonymous/.well-known/openid-configuration
 - admin UI: https://login.example.com:6749/admin
 
 ### The Configuration API
@@ -126,7 +126,7 @@ Endpoints:
 A node Express API that serves the configuration required by the dynamic authenticator.
 
 Endpoints:
-- http://localhost:8080/api/configuration?fid=(provider1|provider2)
+- http://localhost:8080/api/configuration?fid=(provider1|provider2|provider3|provider4)
 
 
 ## Updating the Resources
