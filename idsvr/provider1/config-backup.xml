@@ -303,7 +303,7 @@
                 <client-name>federation-client</client-name>
                 <description>The client that makes the federated login.</description>
                 <secret>$5$TCfYst/ysngW7RbV$rMLasvlJpnQ0wmFoeTrdIHPjVdnsqOVelkqawZ.fZ17</secret>
-                <redirect-uris>https://localhost:8443/authn/authentication/Dynamic1/callback</redirect-uris>
+                <redirect-uris>#{CALLBACK_BASE_URL}/authn/authentication/dynamic-authenticator-oidc/callback</redirect-uris>
                 <scope>openid</scope>
                 <scope>profile</scope>
                 <user-authentication />

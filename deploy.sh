@@ -19,6 +19,10 @@ usage()
 #
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
+if [ ! -f './git/hooks/pre-commit' ]; then
+  cp ./hooks/pre-commit ./.git/hooks/
+fi
+
 #
 # First check prerequisites
 #

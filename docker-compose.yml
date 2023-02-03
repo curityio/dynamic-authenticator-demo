@@ -30,7 +30,7 @@ services:
   # A standalone instance of the Curity Identity Server Provider 1
   #
   provider1-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.3.1
+    image: curity.azurecr.io/curity/idsvr:latest
     ports:
       - "6750:6749"
       - "8444:8443"
@@ -41,6 +41,7 @@ services:
     environment:
       PASSWORD: 'Password1'
       IDSVR_BASE_URL: "https://provider1.example.com:8444"
+      CALLBACK_BASE_URL: "https://login.example.com:8443"
       LOGGING_LEVEL: 'DEBUG'
 
   #
@@ -55,12 +56,11 @@ services:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'Password1'
       POSTGRES_DB: 'idsvr'
-
   #
   # A standalone instance of the Curity Identity Server Provider 2
   #
   provider2-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.3.1
+    image: curity.azurecr.io/curity/idsvr:latest
     ports:
       - "6751:6749"
       - "8445:8443"
@@ -71,21 +71,96 @@ services:
     environment:
       PASSWORD: 'Password1'
       IDSVR_BASE_URL: "https://provider2.example.com:8445"
+      CALLBACK_BASE_URL: "https://login.example.com:8443"
+      LOGGING_LEVEL: 'DEBUG'
+
+  #
+  # An SQL database used by the Curity Identity Server Provider 3
+  #
+  provider3-data:
+    image: postgres:13.2
+    hostname: dbserver3
+    volumes:
+      - ./idsvr/provider3/data-backup.sql:/docker-entrypoint-initdb.d/data-backup.sql
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'Password1'
+      POSTGRES_DB: 'idsvr'
+  #
+  # A standalone instance of the Curity Identity Server Provider 3
+  #
+  provider3-idsvr:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: provider3.example.com
+    ports:
+      - "6752:6749"
+      - "8446:8443"
+    volumes:
+      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+      - ./idsvr/provider3/config-backup.xml:/opt/idsvr/etc/init/config.xml
+      - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
+    environment:
+      PASSWORD: 'Password1'
+      IDSVR_BASE_URL: "https://provider3.example.com:8446"
+      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/dynamic-authenticator-saml/"
+      LOGGING_LEVEL: 'DEBUG'
+
+  #
+  # An SQL database used by the Curity Identity Server Provider 4
+  #
+  provider4-data:
+    image: postgres:13.2
+    hostname: dbserver4
+    volumes:
+      - ./idsvr/provider4/data-backup.sql:/docker-entrypoint-initdb.d/data-backup.sql
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'Password1'
+      POSTGRES_DB: 'idsvr'
+  #
+  # A standalone instance of the Curity Identity Server Provider 4
+  #
+  provider4-idsvr:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: provider4.example.com
+    ports:
+      - "6753:6749"
+      - "8447:8443"
+    volumes:
+      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+      - ./idsvr/provider4/config-backup.xml:/opt/idsvr/etc/init/config.xml
+      - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
+    environment:
+      PASSWORD: 'Password1'
+      IDSVR_BASE_URL: "https://provider4.example.com:8447"
+      SAML_SP_URL: "https://login.example.com:8443/authn/authentication/dynamic-authenticator-saml/"
       LOGGING_LEVEL: 'DEBUG'
 
   #
   # The instance of the Curity Identity Server that uses the Dynamic Authenticator
   #
   authenticator-demo-idsvr:
-    image: curity.azurecr.io/curity/idsvr:7.3.1
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: login.example.com
     ports:
       - "6749:6749"
       - "8443:8443"
     volumes:
       - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
-      - ./idsvr/main/config-backup.xml:/opt/idsvr/etc/init/config.xml
+      # basic setup with a username authenticator and debug action in place
+      - ./idsvr/main/config-backup.xml:/opt/idsvr/etc/init/01_config.xml
+      # dynamic authenticators for OIDC and SAML
+      - ./idsvr/main/oidc-dynamic-authenticator-config.xml:/opt/idsvr/etc/init/02_oidc-dynamic-authenticator-config.xml
+      - ./idsvr/main/saml-dynamic-authenticator-config.xml:/opt/idsvr/etc/init/02_saml-dynamic-authenticator-config.xml
+      # script to retrieve federation id from subject
+      - ./idsvr/main/transformation-procedure-get-federation-id.js:/opt/idsvr/etc/init/transformation-procedures/get-federation-id.js
+      # demo login flow for this deployment that uses the different dynamic authenticators and scripts
+      - ./idsvr/main/demo-login-config.xml:/opt/idsvr/etc/init/03_demo-login-config.xml
+      - ./idsvr/main/filter-procedure-login-demo.js:/opt/idsvr/etc/init/filter-procedures/authenticator/show-demo-login-authenticator-only.js
+      # log settings
       - ./idsvr/log4j2.xml:/opt/idsvr/etc/log4j2.xml
     environment:
+      IDSVR_BASE_URL: "https://login.example.com:8443"
       PASSWORD: 'Password1'
       LOGGING_LEVEL: 'DEBUG'
     extra_hosts:
