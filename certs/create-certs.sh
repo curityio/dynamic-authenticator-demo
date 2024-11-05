@@ -112,5 +112,5 @@ openssl pkcs12 \
 # Remove files we no longer need
 #
 rm example.server*.csr
-rm example.srl
+rm example.ca.srl
 echo '*** Successfully created all certificate files'
