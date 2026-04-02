@@ -1,5 +1,8 @@
 # Dynamic Authenticator Demo
 
+[![Quality](https://img.shields.io/badge/quality-demo-red)](https://curity.io/resources/code-examples/status/)
+[![Availability](https://img.shields.io/badge/availability-source-blue)](https://curity.io/resources/code-examples/status/)
+
 This repository contains resources needed to demonstrate the usage of a Dynamic Authenticator in the Curity Identity Server.
 The resources created with scripts from this repo are:
 
